@@ -1,14 +1,45 @@
 import { Button } from "@/components/ui/button"
-// import * as d3 from "d3";
 import './App.css'
+import { useEffect, useState } from "react";
+import { Activity, Row } from "./global.types";
+import Charts from "./components/Charts";
+import InfoCard from "./components/InfoCard";
 
 function App() {
-  // const height = Math.min(width, 500);
+  const [data, setData] = useState<Row[] | null>(null);
+  const [activityData, setActivityData] = useState<Activity | null>(null);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/data').then(res => res.json()).then(data => {
+      console.log(data);
+      setActivityData(data.AuthorWorklog.activityMeta);
+      setData(data.AuthorWorklog.rows);
+    })
+  }, [])
+
+
 
   return (
     <div>
-      Home page
-      <Button>Button Click</Button>
+      <nav className="border-gray-200 border-2 p-2 bg-white rounded-md w-screen mb-5">
+        <div className="w-full">
+          <Button variant="outline">Dashboard</Button>
+        </div>
+      </nav>
+      <div className="w-full flex flex-col justify-center">
+        <h6 className="mx-10 mb-5 text-xl font-semibold tracking-wide leading-2">Manage Your Insights</h6>
+        <div className="flex justify-center gap-10">
+          {data && data[0].totalActivity.map(activity => {
+            return (
+              <InfoCard activity={activity} />
+            )
+          })}
+        </div>
+        <div className="">
+          
+          {/* <Charts /> */}
+        </div>
+      </div>
     </div>
   ) 
 }
