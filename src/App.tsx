@@ -37,7 +37,7 @@ function App() {
         </div>
         <div className="">
           
-          {/* <Charts /> */}
+          {activityData && <Charts activityData={activityData} />}
         </div>
       </div>
     </div>
