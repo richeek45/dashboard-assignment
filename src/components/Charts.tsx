@@ -2,15 +2,16 @@
 
 import { Row, TotalActivity } from "@/global.types";
 import * as d3 from "d3";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const width = 360, height = 300;
 const margin = { top: 20, right: 30, bottom: 55, left: 70 }
 
-const Charts = ({ rowData } : { rowData: Row[] }) => {
+const Charts = ({ rowData } : { rowData: Row[] }) => { 
+  const chartRef = useRef(null);
 
   useEffect(() => {
-    const svg = d3.select("#chart").attr("width", width).attr("height", height).attr("viewBox", [0, 0, width, height]);
+    const svg = d3.select(chartRef.current).attr("width", width).attr("height", height).attr("viewBox", [0, 0, width, height]);
 
     const x_scale = d3.scaleBand().range([margin.left, width - margin.right]).padding(0.2);
     const y_scale = d3.scaleLinear().range([height - margin.bottom, margin.top]);
@@ -28,7 +29,7 @@ const Charts = ({ rowData } : { rowData: Row[] }) => {
           .selectAll("rect")
           .data(data)
           .join("rect")
-          .attr("class", "bar")
+          .attr("fill", "#5f0f40")
           .attr("x", (d) => x_scale(d.name) as number)
           .attr("y", (d) => y_scale(+d.value))
           .attr("width", x_scale.bandwidth())
@@ -62,7 +63,7 @@ const Charts = ({ rowData } : { rowData: Row[] }) => {
     <div></div>
     <div></div>
     <div className="drop-shadow-md border-gray-300 border-2">
-      <svg id="chart"></svg>
+      <svg id="chart" ref={chartRef}></svg>
     </div>
   </div>
 
