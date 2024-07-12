@@ -7,13 +7,13 @@ import InfoCard from "./components/InfoCard";
 
 function App() {
   const [data, setData] = useState<Row[] | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activityData, setActivityData] = useState<Activity[] | null>(null);
 
   useEffect(() => {
     fetch('../sample-data.json').then(res => res.json()).then(({data}) => {
       setActivityData(data.AuthorWorklog.activityMeta);
       setData(data.AuthorWorklog.rows);
-      console.log(activityData);
     })
   }, [])
 

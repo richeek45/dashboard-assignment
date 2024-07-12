@@ -24,7 +24,10 @@ const Charts = ({ rowData } : { rowData: Row[] }) => {
     // @ts-expect-error -> error
     d3.json("../../sample-data.json").then(({ data }: { AuthorWorklog: { rows: Rows[]}}) => {  
       const sampleData: TotalActivity[] = data.AuthorWorklog.rows[0].totalActivity;
-      console.log(sampleData, 'inside')
+      const color = d3.scaleOrdinal()
+      .domain(sampleData.map(d => d.name))
+      .range(["#3DC2EC", "#06D001", "#FF4191", "#FFB4C2", "#009FBD"]);
+
       if (sampleData) {
         x_scale.domain(sampleData.map((d) => d.name));
         y_scale.domain([0, d3.max(sampleData, (d) => +d.value) || 0]);
@@ -33,30 +36,50 @@ const Charts = ({ rowData } : { rowData: Row[] }) => {
           .selectAll("rect")
           .data(sampleData)
           .join("rect")
-          .attr("fill", "#5f0f40")
+          .attr("fill", d => color(d.name) as string)
           .attr("x", (d) => x_scale(d.name) as number)
           .attr("y", (d) => y_scale(+d.value))
           .attr("width", x_scale.bandwidth())
           .attr("height", (d) => height - margin.bottom - y_scale(+d.value));
-      }
 
-      // append x axis
-      svg
-      .append("g")
-      .attr("transform", `translate(0,${height - margin.bottom})`)
-      .call(x_axis)
-      .selectAll("text") // everything from this point is optional
-      .style("text-anchor", "end")
-      .attr("dx", "-.8em")
-      .attr("dy", ".15em")
-      .attr("transform", "rotate(-65)");
-
-      // add y axis
-      svg
+        // append x axis
+        svg
         .append("g")
-        .attr("transform", `translate(${margin.left},0)`)
-        .call(y_axis);
-        
+        .attr("transform", `translate(0,${height - margin.bottom})`)
+        .call(x_axis)
+        .selectAll("text") // everything from this point is optional
+        .style("text-anchor", "end")
+        .attr("dx", "-.8em")
+        .attr("dy", ".15em")
+        .attr("transform", "rotate(-65)");
+
+        // add y axis
+        svg
+          .append("g")
+          .attr("transform", `translate(${margin.left},0)`)
+          .call(y_axis);
+                  
+        const pie = d3.pie<TotalActivity>().padAngle(1 / radius).sort(null).value(d => +d.value);
+        const arc = d3.arc().innerRadius(radius * 0.67).outerRadius(radius - 1);
+
+        const svg2 = d3
+        .select(donutRef.current)
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+        svg2.selectAll("arc")
+        .data(pie(sampleData))
+        .join('path')
+        .attr("fill", (d) => color(d.data.name) as string)
+        // @ts-expect-error error
+        .attr("d", arc)
+        .attr("class", "arc")
+        .style("stroke-width", "1px")
+
+
+      }
       
     })
 
