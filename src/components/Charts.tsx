@@ -14,7 +14,6 @@ const Charts = ({ rowData } : { rowData: Row[] }) => {
   useEffect(() => {
 
     const svg = d3.select(chartRef.current).attr("width", width).attr("height", height).attr("viewBox", [0, 0, width, height]);
-    console.log(GET())
     const x_scale = d3.scaleBand().range([margin.left, width - margin.right]).padding(0.2);
     const y_scale = d3.scaleLinear().range([height - margin.bottom, margin.top]);
     const x_axis = d3.axisBottom(x_scale);
