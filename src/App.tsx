@@ -10,7 +10,7 @@ function App() {
   const [activityData, setActivityData] = useState<Activity[] | null>(null);
 
   useEffect(() => {
-    fetch('http://localhost:3000/data').then(res => res.json()).then(data => {
+    fetch('../sample-data.json').then(res => res.json()).then(({data}) => {
       setActivityData(data.AuthorWorklog.activityMeta);
       setData(data.AuthorWorklog.rows);
       console.log(activityData);

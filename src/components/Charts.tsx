@@ -5,12 +5,15 @@ import * as d3 from "d3";
 import { useEffect, useRef } from "react";
 
 const width = 360, height = 300;
-const margin = { top: 20, right: 30, bottom: 55, left: 70 }
+const margin = { top: 20, right: 30, bottom: 55, left: 70 };
+const radius = Math.min(width, height) / 2;
 
 const Charts = ({ rowData } : { rowData: Row[] }) => { 
   const chartRef = useRef(null);
+  const donutRef = useRef(null);
 
   useEffect(() => {
+
     const svg = d3.select(chartRef.current).attr("width", width).attr("height", height).attr("viewBox", [0, 0, width, height]);
 
     const x_scale = d3.scaleBand().range([margin.left, width - margin.right]).padding(0.2);
@@ -19,15 +22,16 @@ const Charts = ({ rowData } : { rowData: Row[] }) => {
     const y_axis = d3.axisLeft(y_scale);
 
     // @ts-expect-error -> error
-    d3.json("http://localhost:3000/data").then((sampleData: { AuthorWorklog: { rows: Rows[]}}) => {  
-      const data: TotalActivity[] = sampleData.AuthorWorklog.rows[0].totalActivity;
-      if (data) {
-        x_scale.domain(data.map((d) => d.name));
-        y_scale.domain([0, d3.max(data, (d) => +d.value) || 0]);
+    d3.json("../../sample-data.json").then(({ data }: { AuthorWorklog: { rows: Rows[]}}) => {  
+      const sampleData: TotalActivity[] = data.AuthorWorklog.rows[0].totalActivity;
+      console.log(sampleData, 'inside')
+      if (sampleData) {
+        x_scale.domain(sampleData.map((d) => d.name));
+        y_scale.domain([0, d3.max(sampleData, (d) => +d.value) || 0]);
         
         svg
           .selectAll("rect")
-          .data(data)
+          .data(sampleData)
           .join("rect")
           .attr("fill", "#5f0f40")
           .attr("x", (d) => x_scale(d.name) as number)
@@ -59,11 +63,14 @@ const Charts = ({ rowData } : { rowData: Row[] }) => {
 
   }, [])
 
-  return <div className="flex p-10 justify-end">
+  return <div className="flex p-10 justify-end gap-10">
     <div></div>
     <div></div>
     <div className="drop-shadow-md border-gray-300 border-2">
       <svg id="chart" ref={chartRef}></svg>
+    </div>
+    <div className="drop-shadow-md border-gray-300 border-2">
+      <svg id="donut" ref={donutRef}></svg>
     </div>
   </div>
 
