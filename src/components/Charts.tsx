@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
-import { Row, TotalActivity } from "@/global.types";
+import { Activity, Row, TotalActivity } from "@/global.types";
 import * as d3 from "d3";
 import { useEffect, useRef } from "react";
 
@@ -7,7 +7,7 @@ const width = 360, height = 300;
 const margin = { top: 20, right: 30, bottom: 55, left: 70 };
 const radius = Math.min(width, height) / 2;
 
-const Charts = ({ rowData } : { rowData: Row[] }) => { 
+const Charts = ({ rowData, activityData } : { rowData: Row[], activityData: Activity[] }) => { 
   const chartRef = useRef(null);
   const donutRef = useRef(null);
 
@@ -24,7 +24,7 @@ const Charts = ({ rowData } : { rowData: Row[] }) => {
       const sampleData: TotalActivity[] = data.AuthorWorklog.rows[0].totalActivity;
       const color = d3.scaleOrdinal()
       .domain(sampleData.map(d => d.name))
-      .range(["#3DC2EC", "#06D001", "#FF4191", "#FFB4C2", "#009FBD"]);
+      .range(activityData.map(data => data.fillColor));
 
       if (sampleData) {
         x_scale.domain(sampleData.map((d) => d.name));
@@ -86,7 +86,9 @@ const Charts = ({ rowData } : { rowData: Row[] }) => {
 
   return <div className="flex p-10 justify-end gap-10">
     <div></div>
-    <div></div>
+    <div className="drop-shadow-md border-gray-300 border-2">
+      <svg id="daywise" ref={chartRef}></svg>
+    </div>
     <div className="drop-shadow-md border-gray-300 border-2">
       <svg id="chart" ref={chartRef}></svg>
     </div>

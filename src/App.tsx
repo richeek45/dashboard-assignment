@@ -37,7 +37,7 @@ function App() {
         </div>
         <div>
           
-          {data && <Charts rowData={data} />}
+          {data && <Charts rowData={data} activityData={activityData} />}
         </div>
       </div>
     </div>
