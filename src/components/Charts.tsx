@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
-
-import { GET } from "@/api/file";
 import { Row, TotalActivity } from "@/global.types";
 import * as d3 from "d3";
 import { useEffect, useRef } from "react";
