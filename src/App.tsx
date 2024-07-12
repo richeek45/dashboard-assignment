@@ -7,11 +7,10 @@ import InfoCard from "./components/InfoCard";
 
 function App() {
   const [data, setData] = useState<Row[] | null>(null);
-  const [activityData, setActivityData] = useState<Activity | null>(null);
+  const [activityData, setActivityData] = useState<Activity[] | null>(null);
 
   useEffect(() => {
     fetch('http://localhost:3000/data').then(res => res.json()).then(data => {
-      console.log(data);
       setActivityData(data.AuthorWorklog.activityMeta);
       setData(data.AuthorWorklog.rows);
     })
@@ -31,13 +30,13 @@ function App() {
         <div className="flex justify-center gap-10">
           {data && data[0].totalActivity.map(activity => {
             return (
-              <InfoCard activity={activity} />
+              <InfoCard key={activity.name} activity={activity} />
             )
           })}
         </div>
-        <div className="">
+        <div>
           
-          {activityData && <Charts activityData={activityData} />}
+          {data && <Charts rowData={data} />}
         </div>
       </div>
     </div>

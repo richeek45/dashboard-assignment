@@ -9,8 +9,6 @@ import { ChevronsRight } from "lucide-react";
 
 
 const InfoCard = ({ activity } : { activity: TotalActivity }) => {
-  console.log(activity);
-
 
   return (<Card className="drop-shadow-sm">
     <CardHeader className="p-3">
