@@ -28,7 +28,7 @@ function App() {
       </nav>
       <div className="w-full flex flex-col justify-center">
         <h6 className="mx-10 mb-5 text-xl font-semibold tracking-wide leading-2">Manage Your Insights</h6>
-        <div className="flex justify-center gap-10 mb-10">
+        <div className="flex justify-between gap-10 mb-10 mx-10">
           {data && data[0].totalActivity.map(activity => {
             return (
               <InfoCard key={activity.name} activity={activity} />
