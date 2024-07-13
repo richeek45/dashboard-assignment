@@ -24,13 +24,13 @@ export interface TotalActivity {
   value: string;
 }
 
-interface Items {
+export interface Items {
   count: string;
   fillColor: string;
   label: RepoActions;
 }
 
-interface DayWiseActivity {
+export interface DayWiseActivity {
   date: Date;
   items: { children: Items[]}
 }
