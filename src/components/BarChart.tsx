@@ -7,7 +7,7 @@ import { height, width } from "./Charts";
 
 const margin = { top: 20, right: 30, bottom: 55, left: 70 };
 
-const BarChart = ({sampleData, activityData } : {sampleData: TotalActivity[], activityData: Activity[] }) => {
+const BarChart = ({totalActivity, activityData } : {totalActivity: TotalActivity[], activityData: Activity[] }) => {
   const chartRef = useRef(null);
 
 
@@ -18,16 +18,16 @@ const BarChart = ({sampleData, activityData } : {sampleData: TotalActivity[], ac
     const y_scale = d3.scaleLinear().range([height - margin.bottom, margin.top]);
     const x_axis = d3.axisBottom(x_scale);
     const y_axis = d3.axisLeft(y_scale);        
-    x_scale.domain(sampleData.map((d) => d.name));
-    y_scale.domain([0, d3.max(sampleData, (d) => +d.value) || 0]);
+    x_scale.domain(totalActivity.map((d) => d.name));
+    y_scale.domain([0, d3.max(totalActivity, (d) => +d.value) || 0]);
     const color = d3.scaleOrdinal()
-    .domain(sampleData.map(d => d.name))
+    .domain(totalActivity.map(d => d.name))
     .range(activityData.map(data => data.fillColor));
 
 
     svg
     .selectAll("rect")
-    .data(sampleData)
+    .data(totalActivity)
     .join("rect")
     .attr("fill", d => color(d.name) as string)
     .attr("x", (d) => x_scale(d.name) as number)

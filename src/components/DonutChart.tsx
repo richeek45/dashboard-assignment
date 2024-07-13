@@ -5,14 +5,14 @@ import { height, width } from "./Charts";
 
 
 
-const DonutChart = ({sampleData, activityData } : {sampleData: TotalActivity[], activityData: Activity[] }) => {
+const DonutChart = ({totalActivity, activityData } : {totalActivity: TotalActivity[], activityData: Activity[] }) => {
   const donutRef = useRef(null);
   const radius = Math.min(width, height) / 2;
 
 
   useEffect(() => {
     const color = d3.scaleOrdinal()
-      .domain(sampleData.map(d => d.name))
+      .domain(totalActivity.map(d => d.name))
       .range(activityData.map(data => data.fillColor)); 
               
     const pie = d3.pie<TotalActivity>().padAngle(1 / radius).sort(null).value(d => +d.value);
@@ -26,7 +26,7 @@ const DonutChart = ({sampleData, activityData } : {sampleData: TotalActivity[], 
       .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
     svg2.selectAll("arc")
-      .data(pie(sampleData))
+      .data(pie(totalActivity))
       .join('path')
       .attr("fill", (d) => color(d.data.name) as string)
       // @ts-expect-error error
@@ -39,7 +39,7 @@ const DonutChart = ({sampleData, activityData } : {sampleData: TotalActivity[], 
       .attr("font-size", 16)
       .attr("text-anchor", "middle")
       .selectAll('arc')
-      .data(pie(sampleData))
+      .data(pie(totalActivity))
       .join("text")
       .attr("transform", d => `translate(${arc.centroid(d as unknown as d3.DefaultArcObject)})`)
       .call(text => text.append("tspan")

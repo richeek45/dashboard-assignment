@@ -8,13 +8,13 @@ import DonutChart from "./DonutChart";
 export const width = 360, height = 300;
 
 const Charts = ({ rowData, activityData } : { rowData: Row[], activityData: Activity[] }) => { 
-  const [sampleData, setSampleData] = useState<TotalActivity[] | null>(null);
+  const [totalActivity, setTotalActivity] = useState<TotalActivity[] | null>(null);
 
   useEffect(() => {
     // @ts-expect-error -> error
     d3.json("../../sample-data.json").then(({ data }: { AuthorWorklog: { rows: Rows[]}}) => {  
       const sampleData: TotalActivity[] = data.AuthorWorklog.rows[0].totalActivity;
-      setSampleData(sampleData);
+      setTotalActivity(sampleData);
     })
 
   }, [])
@@ -25,10 +25,10 @@ const Charts = ({ rowData, activityData } : { rowData: Row[], activityData: Acti
       <svg id="daywise"></svg>
     </div>
     <div className="drop-shadow-md border-gray-300 border-2">
-     {activityData && sampleData &&  <BarChart sampleData={sampleData} activityData={activityData} />}
+     {activityData && totalActivity &&  <BarChart totalActivity={totalActivity} activityData={activityData} />}
     </div>
     <div className="drop-shadow-md border-gray-300 border-2">
-      {activityData && sampleData && <DonutChart sampleData={sampleData} activityData={activityData} />}
+      {activityData && totalActivity && <DonutChart totalActivity={totalActivity} activityData={activityData} />}
     </div>
   </div>
 
