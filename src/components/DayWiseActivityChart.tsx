@@ -86,7 +86,25 @@ const DayWiseActivityChart = ({dayWiseActivity} : {dayWiseActivity: DayWiseActiv
         tooltip.style("visibility", "hidden")
     })
 
-    // return () => dayChartRef.current = null;
+     // 6. Finalize chart by adding title and axes labels
+     svg.append("text")
+        .attr("x", margin.left + (width - margin.left - margin.right) / 2)
+        .attr("y", height - margin.bottom / 5)
+        .attr("class", "label")
+        .text("Date");
+
+      svg.append("text")
+         .attr("y", margin.left/4)
+         .attr("x", -height/2)
+         .attr("transform", "rotate(-90)")
+         .attr("class", "label")
+         .text(selectActionType);
+
+    svg.append("text")
+        .attr("x", margin.left + (width - margin.left - margin.right) / 2)
+        .attr("y", margin.top)
+        .attr("id", "title")
+        .text(selectActionType);
   
 
   }, [selectActionType])
