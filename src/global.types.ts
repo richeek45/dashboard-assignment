@@ -31,7 +31,7 @@ export interface Items {
 }
 
 export interface DayWiseActivity {
-  date: Date;
+  date: string;
   items: { children: Items[]}
 }
 

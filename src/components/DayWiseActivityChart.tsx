@@ -16,10 +16,8 @@ const findRepoActionsByDate = (dayWiseActivity: DayWiseActivity[], actionType: R
 
 const DayWiseActivityChart = ({dayWiseActivity} : {dayWiseActivity: DayWiseActivity[]}) => {
   const dayChartRef = useRef(null);
-  console.log(dayWiseActivity)
   const [selectActionType, setSelectActionType] = useState(RepoActions.PR_OPEN);
   const openPRsByDate = findRepoActionsByDate(dayWiseActivity, selectActionType);
-  console.log(openPRsByDate);
 
   useEffect(() => {
     const xMin = d3.min(openPRsByDate, (d) => d.date) as Date;
