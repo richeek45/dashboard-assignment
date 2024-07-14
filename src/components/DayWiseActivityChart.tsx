@@ -55,8 +55,6 @@ const DayWiseActivityChart = ({dayWiseActivity} : {dayWiseActivity: DayWiseActiv
     // 5. Draw individual bars and define mouse events for the tooltip
     const barwidth = (xScale.range()[1] - xScale.range()[0]) / openPRsByDate.length
 
-    const tooltip = d3.select("#main").append("div").attr("id", "tooltip").style("visibility", "hidden")
-
     svg.selectAll("rect")
     .data(openPRsByDate)
     .enter()
@@ -68,19 +66,10 @@ const DayWiseActivityChart = ({dayWiseActivity} : {dayWiseActivity: DayWiseActiv
     .attr("fill", d => d.fillColor)
     .attr("data-date", (d) => d.date as unknown as string)
     .attr("data-count", (d) => d.count)
-    .on("mouseover", (event, d) => {
-        tooltip.style("visibility", "visible")
-               .style("left", event.pageX+10+"px")
-               .style("top", event.pageY-80+"px")
-               .attr("data-date", d.date as unknown as string)
-               .html(d.date + "</br>" + d.count + " " + d.label )
-    })
-    .on("mousemove", (event) => {
-        tooltip.style("left", event.pageX+10+"px")
-    })
-    .on("mouseout", () => {
-        tooltip.style("visibility", "hidden")
-    })
+    .join("rect")
+    .append("title")
+    .text(d => `${d.date}\n${d.label}: ${d.count}`);
+
 
      // 6. Finalize chart by adding title and axes labels
      svg.append("text")

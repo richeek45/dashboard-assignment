@@ -63,7 +63,7 @@ const MultiChart = ({ dayWiseActivity } : {dayWiseActivity: DayWiseActivity[]}) 
       .attr("width", x_scale.bandwidth())
     .append("title")
     // @ts-expect-error error
-      .text(d => `${d.data[0]} ${d.key}\n${formatValue(d.data[1].get(d.key).count)}`);
+      .text(d => `${d.data[0]}\n${d.key}: ${formatValue(d.data[1].get(d.key).count)}`);
 
   // Append the horizontal axis.
   svg.append("g")
