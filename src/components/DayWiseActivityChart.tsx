@@ -20,8 +20,8 @@ const DayWiseActivityChart = ({dayWiseActivity} : {dayWiseActivity: DayWiseActiv
   const openPRsByDate = findRepoActionsByDate(dayWiseActivity, selectActionType);
 
   useEffect(() => {
-    const xMin = d3.min(openPRsByDate, (d) => d.date) as Date;
-    const xMax = d3.max(openPRsByDate, (d) => d.date) as Date;
+    const xMin = d3.min(openPRsByDate, (d) => d.date) as string;
+    const xMax = d3.max(openPRsByDate, (d) => d.date) as string;
 
     const yMin = d3.min(openPRsByDate, (d) => d.count) as string;
     const yMax = d3.max(openPRsByDate, (d) => d.count) as string;
