@@ -30,21 +30,18 @@ const MultiChart = ({ dayWiseActivity } : {dayWiseActivity: DayWiseActivity[]}) 
   // @ts-expect-error error
     .value(([, group], key) => +group.get(key).count)(d3.index(data, d => d.date, d => d.label));
 
-  console.log(series)
-
-  const x = d3.scaleBand()
+  const x_scale = d3.scaleBand()
       .domain(d3.groupSort(data, D => -d3.sum(D, d => +d.count), d => d.date))
       .range([margin.left, width - margin.right])
       .padding(0.1);
 
-  const y = d3.scaleLinear()
-
+  const y_scale = d3.scaleLinear()
       .domain([0, d3.max(series, d => d3.max(d, d => +d[1])) as number])
       .rangeRound([height - margin.bottom, margin.top]);
 
   const color = d3.scaleOrdinal()
       .domain(series.map(d => d.key))
-      .range(d3.schemeSpectral[series.length])
+      .range(data.map(i => i.fillColor))
       .unknown("#ccc");
 
    // A function to format the value in the tooltip.
@@ -60,10 +57,10 @@ const MultiChart = ({ dayWiseActivity } : {dayWiseActivity: DayWiseActivity[]}) 
     // @ts-expect-error error
     .data(D => D.map(d => (d.key = D.key, d)))
     .join("rect")
-      .attr("x", d => x(d.data[0].toString()) as unknown as string)
-      .attr("y", d => y(d[1]))
-      .attr("height", d => y(d[0]) - y(d[1]))
-      .attr("width", x.bandwidth())
+      .attr("x", d => x_scale(d.data[0].toString()) as unknown as string)
+      .attr("y", d => y_scale(d[1]))
+      .attr("height", d => y_scale(d[0]) - y_scale(d[1]))
+      .attr("width", x_scale.bandwidth())
     .append("title")
     // @ts-expect-error error
       .text(d => `${d.data[0]} ${d.key}\n${formatValue(d.data[1].get(d.key).count)}`);
@@ -71,7 +68,7 @@ const MultiChart = ({ dayWiseActivity } : {dayWiseActivity: DayWiseActivity[]}) 
   // Append the horizontal axis.
   svg.append("g")
   .attr("transform", `translate(0,${height - margin.bottom})`)
-  .call(d3.axisBottom(x))
+  .call(d3.axisBottom(x_scale))
   .selectAll("text") // everything from this point is optional
   .style("text-anchor", "end")
   .attr("dx", "-.8em")
@@ -82,7 +79,7 @@ const MultiChart = ({ dayWiseActivity } : {dayWiseActivity: DayWiseActivity[]}) 
   // Append the vertical axis.
   svg.append("g")
   .attr("transform", `translate(${margin.left},0)`)
-  .call(d3.axisLeft(y).ticks(null, "s"))
+  .call(d3.axisLeft(y_scale).ticks(null, "s"))
   .call(g => g.selectAll(".domain").remove());
 
   return () => {
