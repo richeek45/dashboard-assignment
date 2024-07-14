@@ -4,7 +4,7 @@ import * as d3 from "d3";
 import SelectActionTypes from "./SelectActionTypes";
 
 const margin = { top: 20, right: 30, bottom: 55, left: 70 };
-const width = 640, height = 300;
+const width = 640, height = 360;
 
 const findRepoActionsByDate = (dayWiseActivity: DayWiseActivity[], actionType: RepoActions) => {
   return dayWiseActivity.map(data => {

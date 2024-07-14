@@ -52,10 +52,16 @@ const BarChart = ({totalActivity, activityData } : {totalActivity: TotalActivity
     .attr("transform", `translate(${margin.left},0)`)
     .call(y_axis);
 
+    svg.append("text")
+      .attr("x", (width - margin.left - margin.right) / 2)
+      .attr("y", height + 30)
+      .attr("class", "label")
+      .text("Total Activity");
+
   }, [])
 
 
-  return (<svg id="chart" ref={chartRef}></svg>)
+  return (<svg id="chart" className="h-full" ref={chartRef}></svg>)
 }
 
 export default BarChart;

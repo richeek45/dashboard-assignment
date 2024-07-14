@@ -3,8 +3,8 @@ import * as d3 from "d3";
 import { DayWiseActivity, RepoActions } from "@/global.types";
 
 
-const margin = { top: 20, right: 30, bottom: 55, left: 70 };
-const width = 640, height = 300;
+const margin = { top: 20, right: 30, bottom: 100, left: 70 };
+const width = 640, height = 400;
 
 const MultiChart = ({ dayWiseActivity } : {dayWiseActivity: DayWiseActivity[]}) => {
   const multiChartRef = useRef(null);
@@ -69,7 +69,7 @@ const MultiChart = ({ dayWiseActivity } : {dayWiseActivity: DayWiseActivity[]}) 
   svg.append("g")
   .attr("transform", `translate(0,${height - margin.bottom})`)
   .call(d3.axisBottom(x_scale))
-  .selectAll("text") // everything from this point is optional
+  .selectAll("text")
   .style("text-anchor", "end")
   .attr("dx", "-.8em")
   .attr("dy", ".15em")
@@ -82,6 +82,26 @@ const MultiChart = ({ dayWiseActivity } : {dayWiseActivity: DayWiseActivity[]}) 
   .call(d3.axisLeft(y_scale).ticks(null, "s"))
   .call(g => g.selectAll(".domain").remove());
 
+  svg.append("text")
+  .attr("y", margin.left/4)
+  .attr("x", -height/2)
+  .attr("transform", "rotate(-90)")
+  .attr("class", "label")
+  .text("Total Count");
+
+  svg.append("text")
+    .attr("x", margin.left + (width - margin.left - margin.right) / 2)
+    .attr("y", height - margin.bottom / 5)
+    .attr("class", "label")
+    .text("Date");
+
+  svg.append("text")
+    .attr("x", margin.left + (width - margin.left - margin.right) / 2)
+    .attr("y", margin.top)
+    .attr("id", "title")
+    .text("Day Wise Actions");
+
+
   return () => {
     d3.select(multiChartRef.current).select('svg').remove();
   } 
@@ -89,7 +109,7 @@ const MultiChart = ({ dayWiseActivity } : {dayWiseActivity: DayWiseActivity[]}) 
   }, [])
 
 
-  return <div ref={multiChartRef}></div>
+  return <div  ref={multiChartRef}></div>
 }
 
 export default MultiChart;
