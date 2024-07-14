@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import BarChart from "./BarChart";
 import DonutChart from "./DonutChart";
 import DayWiseActivityChart from "./DayWiseActivityChart";
+import MultiChart from "./MultiChart";
 
 export const width = 360, height = 300;
 
@@ -23,16 +24,22 @@ const Charts = ({ rowData, activityData } : { rowData: Row[], activityData: Acti
 
   }, [])
 
-  return <div className="flex p-10 justify-end gap-10">
-    <div></div>
-    <div className="drop-shadow-md border-gray-300 border-2">
-      {dayWiseActivity && <DayWiseActivityChart dayWiseActivity={dayWiseActivity} />}
+  return <div className="flex flex-col p-10">
+    <div className='flex justify-center gap-10 mb-10'>
+      <div className="drop-shadow-md border-gray-300 border-2">
+        {dayWiseActivity && <MultiChart dayWiseActivity={dayWiseActivity} />}
+      </div>
+      <div className="drop-shadow-md border-gray-300 border-2">
+        {activityData && totalActivity && <DonutChart totalActivity={totalActivity} activityData={activityData} />}
+      </div>
     </div>
-    <div className="drop-shadow-md border-gray-300 border-2">
-     {activityData && totalActivity &&  <BarChart totalActivity={totalActivity} activityData={activityData} />}
-    </div>
-    <div className="drop-shadow-md border-gray-300 border-2">
-      {activityData && totalActivity && <DonutChart totalActivity={totalActivity} activityData={activityData} />}
+    <div className='flex justify-center gap-10 mb-10'>
+      <div className="drop-shadow-md border-gray-300 border-2">
+        {dayWiseActivity && <DayWiseActivityChart dayWiseActivity={dayWiseActivity} />}
+      </div>
+      <div className="drop-shadow-md border-gray-300 border-2">
+      {activityData && totalActivity &&  <BarChart totalActivity={totalActivity} activityData={activityData} />}
+      </div>
     </div>
   </div>
 
