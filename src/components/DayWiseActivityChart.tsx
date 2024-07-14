@@ -22,8 +22,6 @@ const DayWiseActivityChart = ({dayWiseActivity} : {dayWiseActivity: DayWiseActiv
   console.log(openPRsByDate);
 
   useEffect(() => {
-    // const x = d3.scaleBand().domain(itr).range([0, 960]).padding(0.1);
-
     const xMin = d3.min(openPRsByDate, (d) => d.date) as Date;
     const xMax = d3.max(openPRsByDate, (d) => d.date) as Date;
 
@@ -44,7 +42,7 @@ const DayWiseActivityChart = ({dayWiseActivity} : {dayWiseActivity: DayWiseActiv
     const xAxis = d3.axisBottom(xScale);
     const yAxis = d3.axisLeft(yScale);
 
-    const svg = d3.select(dayChartRef.current).attr("width", width).attr("height", height).attr("viewBox", [0, 0, width, height]);
+    const svg = d3.select(dayChartRef.current).append('svg').attr("width", width).attr("height", height).attr("viewBox", [0, 0, width, height]);
 
 
     svg.append("g")
@@ -105,15 +103,17 @@ const DayWiseActivityChart = ({dayWiseActivity} : {dayWiseActivity: DayWiseActiv
         .attr("y", margin.top)
         .attr("id", "title")
         .text(selectActionType);
-  
+
+  return () => {
+    d3.select(dayChartRef.current).select('svg').remove();
+  };
 
   }, [selectActionType])
 
 
   return (<div id="main">
     <SelectActionTypes setSelectActionTypes={setSelectActionType} />
-
-    <svg id="daywise" ref={dayChartRef} ></svg>
+    <div ref={dayChartRef}></div>
   </div>)
 
 }

@@ -95,12 +95,12 @@
                     "fillColor": "#0396A6"
                   },
                   {
-                    "count": "0",
+                    "count": "7",
                     "label": "Incident Alerts",
                     "fillColor": "#5F50A9"
                   },
                   {
-                    "count": "0",
+                    "count": "1",
                     "label": "Incidents Resolved",
                     "fillColor": "#8F3519"
                   }
@@ -137,7 +137,7 @@
                     "fillColor": "#0396A6"
                   },
                   {
-                    "count": "0",
+                    "count": "3",
                     "label": "Incident Alerts",
                     "fillColor": "#5F50A9"
                   },
@@ -179,12 +179,12 @@
                     "fillColor": "#0396A6"
                   },
                   {
-                    "count": "0",
+                    "count": "6",
                     "label": "Incident Alerts",
                     "fillColor": "#5F50A9"
                   },
                   {
-                    "count": "0",
+                    "count": "3",
                     "label": "Incidents Resolved",
                     "fillColor": "#8F3519"
                   }
@@ -221,7 +221,7 @@
                     "fillColor": "#0396A6"
                   },
                   {
-                    "count": "0",
+                    "count": "2",
                     "label": "Incident Alerts",
                     "fillColor": "#5F50A9"
                   },
@@ -263,12 +263,12 @@
                     "fillColor": "#0396A6"
                   },
                   {
-                    "count": "0",
+                    "count": "3",
                     "label": "Incident Alerts",
                     "fillColor": "#5F50A9"
                   },
                   {
-                    "count": "0",
+                    "count": "5",
                     "label": "Incidents Resolved",
                     "fillColor": "#8F3519"
                   }
@@ -285,7 +285,7 @@
                     "fillColor": "#EF6B6B"
                   },
                   {
-                    "count": "0",
+                    "count": "4",
                     "label": "PR Merged",
                     "fillColor": "#61CDBB"
                   },
@@ -305,12 +305,12 @@
                     "fillColor": "#0396A6"
                   },
                   {
-                    "count": "0",
+                    "count": "1",
                     "label": "Incident Alerts",
                     "fillColor": "#5F50A9"
                   },
                   {
-                    "count": "0",
+                    "count": "1",
                     "label": "Incidents Resolved",
                     "fillColor": "#8F3519"
                   }
@@ -342,17 +342,17 @@
                     "fillColor": "#C2528B"
                   },
                   {
-                    "count": "0",
+                    "count": "3",
                     "label": "PR Comments",
                     "fillColor": "#0396A6"
                   },
                   {
-                    "count": "0",
+                    "count": "4",
                     "label": "Incident Alerts",
                     "fillColor": "#5F50A9"
                   },
                   {
-                    "count": "0",
+                    "count": "3",
                     "label": "Incidents Resolved",
                     "fillColor": "#8F3519"
                   }
@@ -389,7 +389,7 @@
                     "fillColor": "#0396A6"
                   },
                   {
-                    "count": "0",
+                    "count": "6",
                     "label": "Incident Alerts",
                     "fillColor": "#5F50A9"
                   },
@@ -411,7 +411,7 @@
                     "fillColor": "#EF6B6B"
                   },
                   {
-                    "count": "0",
+                    "count": "4",
                     "label": "PR Merged",
                     "fillColor": "#61CDBB"
                   },
@@ -431,12 +431,12 @@
                     "fillColor": "#0396A6"
                   },
                   {
-                    "count": "0",
+                    "count": "3",
                     "label": "Incident Alerts",
                     "fillColor": "#5F50A9"
                   },
                   {
-                    "count": "0",
+                    "count": "3",
                     "label": "Incidents Resolved",
                     "fillColor": "#8F3519"
                   }
@@ -468,7 +468,7 @@
                     "fillColor": "#C2528B"
                   },
                   {
-                    "count": "0",
+                    "count": "5",
                     "label": "PR Comments",
                     "fillColor": "#0396A6"
                   },
@@ -478,7 +478,7 @@
                     "fillColor": "#5F50A9"
                   },
                   {
-                    "count": "0",
+                    "count": "1",
                     "label": "Incidents Resolved",
                     "fillColor": "#8F3519"
                   }
@@ -495,7 +495,7 @@
                     "fillColor": "#EF6B6B"
                   },
                   {
-                    "count": "0",
+                    "count": "3",
                     "label": "PR Merged",
                     "fillColor": "#61CDBB"
                   },
@@ -510,12 +510,12 @@
                     "fillColor": "#C2528B"
                   },
                   {
-                    "count": "0",
+                    "count": "2",
                     "label": "PR Comments",
                     "fillColor": "#0396A6"
                   },
                   {
-                    "count": "0",
+                    "count": "1",
                     "label": "Incident Alerts",
                     "fillColor": "#5F50A9"
                   },
@@ -552,12 +552,12 @@
                     "fillColor": "#C2528B"
                   },
                   {
-                    "count": "0",
+                    "count": "10",
                     "label": "PR Comments",
                     "fillColor": "#0396A6"
                   },
                   {
-                    "count": "0",
+                    "count": "2",
                     "label": "Incident Alerts",
                     "fillColor": "#5F50A9"
                   },
@@ -594,7 +594,7 @@
                     "fillColor": "#C2528B"
                   },
                   {
-                    "count": "0",
+                    "count": "3",
                     "label": "PR Comments",
                     "fillColor": "#0396A6"
                   },
